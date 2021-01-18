@@ -5,7 +5,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class AnimationObject {
     AnimationObject currentAnimation;
 
-    public void update(int time){
+    public void update(float time){
         currentAnimation.update(time);
     }
 

@@ -34,13 +34,17 @@ public class MyOpenGLRenderer implements Renderer {
 		});
 
 		gl.glEnable(GL10.GL_TEXTURE_2D);
-		this.tex = new Texture(gl, context, R.drawable.rock_wall_n7_s_t6_k20_c_256x256);
-
+		// MARIO IDLE
+		this.tex = new Texture(gl, context, R.drawable.mario);
+		float xMin = 225 / 256f;
+		float xMax = (225+25) / 256f;
+		float yMin = 1 - (36+36) / 512f;
+		float yMax = 1f - 36 / 512f;
 		square.setTexture(tex, new float[]{
-				0.0f, 0.0f,
-				1.0f, 0.0f,
-				1.0f, 1.0f,
-				0.0f, 1.0f,
+				xMin, yMax,
+				xMin, yMin,
+				xMax, yMin,
+				xMax, yMax,
 		});
 	}
 
@@ -55,6 +59,11 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glTranslatef(0.0f, 0.0f, -10.0f);
 
+//		AnimationManager mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f);
+//		mario.setAnimation("walk");
+//		mario.update(System.currentTimeMillis());
+//		mario.draw(gl);
+
 		// Green Square
 		gl.glPushMatrix();
 		int midAngle = angle % 200;
@@ -64,10 +73,10 @@ public class MyOpenGLRenderer implements Renderer {
 		//gl.glColor4f(0.0f, 1.0f, 0.0f, 0.0f);
 		square.draw(gl);
 		gl.glPopMatrix();
-		
+
 		gl.glRotatef(angle, 0.0f, 1.0f, 0.0f);
 
-		// Red Square
+/*		// Red Square
 		gl.glPushMatrix();
 		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
 		gl.glTranslatef(-2.0f, 0.0f, 0.0f);
@@ -81,8 +90,8 @@ public class MyOpenGLRenderer implements Renderer {
 		gl.glTranslatef( 1.0f, 0.0f, 0.0f);
 		//gl.glColor4f(0.0f, 0.0f, 1.0f, 0.0f);
 		square.draw(gl);
-		gl.glPopMatrix();
-		
+		gl.glPopMatrix();*/
+
 		//angle += 5.0f; //Animacion
 	}
 

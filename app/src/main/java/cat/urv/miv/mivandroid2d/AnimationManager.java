@@ -9,10 +9,10 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class AnimationManager extends AnimationObject {
     HashMap<String, Animation> animations;
-    final int default_height = 512;
-    final int default_width = 256;
+    final float default_height = 512;
+    final float default_width = 256;
 
-    public AnimationManager(GL10 gl, Context context, int resource_id, int raw_id, int speed){
+    public AnimationManager(GL10 gl, Context context, int resource_id, int raw_id, float speed){
         HashMap<String, ArrayList<Square>> atlas = parseTextureAtlas(gl, context, resource_id, raw_id);
         animations = new HashMap<String, Animation>();
         for (String animation_name : atlas.keySet()) {
@@ -40,11 +40,12 @@ public class AnimationManager extends AnimationObject {
                     frames = atlas.get(anim_name);
                 }
                 else {
-                    frames = new ArrayList<>();
+                    frames = new ArrayList<Square>();
                 }
                 Square square = new Square();
                 square.setTexture(new Texture(gl, context, resource_id), coords);
                 frames.add(square);
+                atlas.put(anim_name, frames);
             }
         }
         catch (IOException e) {
@@ -58,19 +59,21 @@ public class AnimationManager extends AnimationObject {
 
     private float[] calculateTextureCoordinates(int x, int y, int width, int height){
         float xMin = x / default_width;
-        float yMin = y / default_height;
-        float xMax = width / default_width;
-        float yMax = height / default_height;
+        float yMin = 1 - (y+height) / default_height;
+        float yMax = 1 - y / default_height;
+        float xMax = (x+width) / default_width;
         return new float[]{
-                xMin,yMin,
-                xMax,yMin,
-                xMax,yMax,
-                xMin,yMin
+                xMax, yMax,
+                xMax, yMin,
+                xMin, yMin,
+                xMin, yMax,
         };
     }
 
     public void setAnimation(String animation_name){
         currentAnimation = animations.get(animation_name);
     }
+
+
 
 }

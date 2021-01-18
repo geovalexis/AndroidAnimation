@@ -8,10 +8,11 @@ import java.nio.ShortBuffer;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Square {
-	private float vertices[] = {-1.0f, -1.0f, 0.0f,
-			-1.0f,  1.0f, 0.0f,
-			1.0f,  1.0f, 0.0f,
-			1.0f, -1.0f, 0.0f};
+	private float vertices[] = {
+			-1.0f, -1.0f, 0.0f, // 0, Bottom left
+			-1.0f,  1.0f, 0.0f, // 1, Top Left
+			1.0f,  1.0f, 0.0f,  // 2, Top Right
+			1.0f, -1.0f, 0.0f}; // 3, Bottom Right
 	private short faces[] = { 0, 1, 2, 0, 2, 3 };
 
 	// Our vertex buffer.

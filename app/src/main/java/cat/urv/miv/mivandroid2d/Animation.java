@@ -9,17 +9,22 @@ public class Animation extends AnimationObject {
     int num_frames;
     int frame_actual;
     float speed;
+    float last_update;
 
-    public Animation(ArrayList<Square> frames, int speed){
+    public Animation(ArrayList<Square> frames, float speed){
         this.frames_list = frames;
         this.num_frames = frames.size();
         this.frame_actual = 0;
         this.speed = speed;
+        this.last_update = -speed;
     }
 
     @Override
-    public void update(int time){
-        //TODO: implementar logica de speed mas tiempo
+    public void update(float time){
+        if (time > (this.last_update + this.speed)) {
+            frame_actual+=1;
+            this.last_update = time;
+        }
     }
 
     @Override
