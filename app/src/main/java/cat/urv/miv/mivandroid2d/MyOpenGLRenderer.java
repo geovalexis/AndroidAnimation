@@ -41,10 +41,10 @@ public class MyOpenGLRenderer implements Renderer {
 		float yMin = 1 - (36+36) / 512f;
 		float yMax = 1f - 36 / 512f;
 		square.setTexture(tex, new float[]{
-				xMin, yMax,
-				xMin, yMin,
-				xMax, yMin,
 				xMax, yMax,
+				xMax, yMin,
+				xMin, yMin,
+				xMin, yMax,
 		});
 	}
 
@@ -59,40 +59,8 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glTranslatef(0.0f, 0.0f, -10.0f);
 
-//		AnimationManager mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f);
-//		mario.setAnimation("walk");
-//		mario.update(System.currentTimeMillis());
-//		mario.draw(gl);
-
-		// Green Square
-		gl.glPushMatrix();
-		int midAngle = angle % 200;
-		if (midAngle > 100)
-			midAngle = 200 - midAngle;
-		gl.glTranslatef(0.0f, 0.0f, midAngle * -0.1f);
-		//gl.glColor4f(0.0f, 1.0f, 0.0f, 0.0f);
 		square.draw(gl);
-		gl.glPopMatrix();
 
-		gl.glRotatef(angle, 0.0f, 1.0f, 0.0f);
-
-/*		// Red Square
-		gl.glPushMatrix();
-		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		gl.glTranslatef(-2.0f, 0.0f, 0.0f);
-		//gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
-		square.draw(gl);
-		gl.glPopMatrix();
-
-		// Blue Square
-		gl.glPushMatrix();
-		gl.glRotatef(2.0f * angle, 0.0f, 0.0f, 1.0f);
-		gl.glTranslatef( 1.0f, 0.0f, 0.0f);
-		//gl.glColor4f(0.0f, 0.0f, 1.0f, 0.0f);
-		square.draw(gl);
-		gl.glPopMatrix();*/
-
-		//angle += 5.0f; //Animacion
 	}
 
 	// RESIZE
