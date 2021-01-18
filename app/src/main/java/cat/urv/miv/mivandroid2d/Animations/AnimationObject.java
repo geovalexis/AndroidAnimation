@@ -1,4 +1,4 @@
-package cat.urv.miv.mivandroid2d;
+package cat.urv.miv.mivandroid2d.Animations;
 
 import javax.microedition.khronos.opengles.GL10;
 

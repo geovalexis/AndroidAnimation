@@ -7,6 +7,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
+import cat.urv.miv.mivandroid2d.Animations.AnimationManager;
+
 public class MyOpenGLRenderer implements Renderer {
 
 	private Square background;

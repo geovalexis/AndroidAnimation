@@ -1,4 +1,4 @@
-package cat.urv.miv.mivandroid2d;
+package cat.urv.miv.mivandroid2d.Animations;
 
 import android.content.Context;
 import java.io.*;
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import cat.urv.miv.mivandroid2d.Square;
+import cat.urv.miv.mivandroid2d.Texture;
 
 public class AnimationManager extends AnimationObject {
     HashMap<String, Animation> animations;

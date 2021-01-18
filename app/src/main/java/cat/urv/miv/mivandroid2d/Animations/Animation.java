@@ -1,8 +1,10 @@
-package cat.urv.miv.mivandroid2d;
+package cat.urv.miv.mivandroid2d.Animations;
 
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import cat.urv.miv.mivandroid2d.Square;
 
 public class Animation extends AnimationObject {
     ArrayList<Square> frames_list;
