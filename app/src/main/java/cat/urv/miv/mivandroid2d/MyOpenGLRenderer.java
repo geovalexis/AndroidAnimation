@@ -13,6 +13,7 @@ public class MyOpenGLRenderer implements Renderer {
 	private int angle = 0;
 	private Context context;
 	private Texture tex;
+	AnimationManager mario;
 
 	public MyOpenGLRenderer(Context context){
 		this.context = context;
@@ -35,17 +36,19 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		// MARIO IDLE
-		this.tex = new Texture(gl, context, R.drawable.mario);
-		float xMin = 225 / 256f;
-		float xMax = (225+25) / 256f;
-		float yMin = 1 - (36+36) / 512f;
-		float yMax = 1f - 36 / 512f;
-		square.setTexture(tex, new float[]{
-				xMax, yMax,
-				xMax, yMin,
-				xMin, yMin,
-				xMin, yMax,
-		});
+//		this.tex = new Texture(gl, context, R.drawable.mario);
+//		float xMin = 225 / 256f;
+//		float xMax = (225+25) / 256f;
+//		float yMin = 1 - (36+36) / 512f;
+//		float yMax = 1f - 36 / 512f;
+//		square.setTexture(tex, new float[]{
+//				xMax, yMax,
+//				xMax, yMin,
+//				xMin, yMin,
+//				xMin, yMax,
+//		});
+		mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f);
+		mario.setAnimation("walk");
 	}
 
 	// DRAW
@@ -59,7 +62,10 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glTranslatef(0.0f, 0.0f, -10.0f);
 
-		square.draw(gl);
+
+		mario.update(System.nanoTime()/10E6f);
+		mario.draw(gl);
+
 
 	}
 
