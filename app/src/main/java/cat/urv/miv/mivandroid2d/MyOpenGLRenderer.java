@@ -9,10 +9,8 @@ import android.opengl.GLU;
 
 public class MyOpenGLRenderer implements Renderer {
 
-	private Square square;
-	private int angle = 0;
+	private Square background;
 	private Context context;
-	private Texture tex;
 	AnimationManager mario;
 
 	public MyOpenGLRenderer(Context context){
@@ -24,31 +22,21 @@ public class MyOpenGLRenderer implements Renderer {
 		// Image Background color
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 
-		//Create the objects
-		square = new Square();
-		//White color
-		square.setColor(new float[]{
-				1.0f, 1.0f, 1.0f, 0.0f,
-				1.0f, 1.0f, 1.0f, 0.0f,
-				1.0f, 1.0f, 1.0f, 0.0f,
-				1.0f, 1.0f, 1.0f, 0.0f
-		});
-
+		// Enable functionalities
 		gl.glEnable(GL10.GL_TEXTURE_2D);
-		// MARIO IDLE
-//		this.tex = new Texture(gl, context, R.drawable.mario);
-//		float xMin = 225 / 256f;
-//		float xMax = (225+25) / 256f;
-//		float yMin = 1 - (36+36) / 512f;
-//		float yMax = 1f - 36 / 512f;
-//		square.setTexture(tex, new float[]{
-//				xMax, yMax,
-//				xMax, yMin,
-//				xMin, yMin,
-//				xMin, yMax,
-//		});
+		gl.glEnable(GL10.GL_BLEND);
+
+		//Create the objects
+		background = new Square();
+		background.setTexture(new Texture(gl, context, R.drawable.backgrounds_super_mario_bros),
+				new float[]{
+						0.0f, 1.0f,
+						0.0f, 0.0f,
+						1.0f, 0.0f,
+						1.0f, 1.0f,
+				});
+
 		mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f);
-		mario.setAnimation("walk");
 	}
 
 	// DRAW
@@ -62,10 +50,23 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glTranslatef(0.0f, 0.0f, -10.0f);
 
+		// Background
+		gl.glPushMatrix();
+		gl.glTranslatef(0.25f, 0.0f, 0f);
+		gl.glScalef(4, 2, 0);
+		//gl.glColor4f(0.0f, 1.0f, 0.0f, 0.0f);
+		background.draw(gl);
+		gl.glPopMatrix();
 
+		gl.glPushMatrix();
+		gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA ); // = color * alpha + background * (1-alpha)
+		//gl.glLineWidth(5.0f);
+		gl.glScalef(0.5f, 0.5f, 0);
+		gl.glTranslatef(0.0f, -2.5f, 0f);
+		mario.setAnimation("walk");
 		mario.update(System.nanoTime()/10E6f);
 		mario.draw(gl);
-
+		gl.glPopMatrix();
 
 	}
 
