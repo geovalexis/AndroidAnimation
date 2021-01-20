@@ -31,7 +31,7 @@ public class HorizontalScrolling extends UpdatableObject {
         // DRAW FROM THE LAST UPDATED X
         for (int y=0; y < scene.length; y++){
             for (int x = start_x; x < scene[y].length; x++){
-                gl.glPushMatrix(); //
+                gl.glPushMatrix();
                 gl.glTranslatef((x-start_x)*2.0f, -y*2.0f, 0.0f); // Each square has a size of 2
                 scene[y][x].draw(gl);
                 gl.glPopMatrix();

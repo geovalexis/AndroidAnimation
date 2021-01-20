@@ -101,4 +101,16 @@ public class TileMap {
         };
     }
 
+    public void draw(GL10 gl) {
+        // DRAW FROM THE LAST UPDATED X
+        for (int y = 0; y < scene.length; y++) {
+            for (int x = 0; x < scene[y].length; x++) {
+                gl.glPushMatrix();
+                gl.glTranslatef(x*2.0f, -y*2.0f, 0.0f); // Each square has a size of 2
+                scene[y][x].draw(gl);
+                gl.glPopMatrix();
+            }
+        }
+    }
+
 }

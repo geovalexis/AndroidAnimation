@@ -15,11 +15,10 @@ import cat.urv.miv.mivandroid2d.Objects.TileMap;
 
 public class MyOpenGLRenderer implements Renderer {
 
-	private Square background;
 	private Context context;
 	AnimationManager mario;
-	TileMap scene1, scene2, scene3, scene4;
-	HorizontalScrolling hs1, hs2, hs3, hs4;
+	TileMap scene2, scene3, scene4;
+	HorizontalScrolling hs2, hs3, hs4;
 
 	public MyOpenGLRenderer(Context context){
 		this.context = context;
@@ -38,23 +37,12 @@ public class MyOpenGLRenderer implements Renderer {
 
 
 		//Create the objects
-		background = new Square();
-		background.setTexture(new Texture(gl, context, R.drawable.backgrounds_super_mario_bros),
-				new float[]{
-						0.0f, 1.0f,
-						0.0f, 0.0f,
-						1.0f, 0.0f,
-						1.0f, 1.0f,
-				});
-
-		scene1 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap1);
-		hs1 = new HorizontalScrolling(scene1.getScene(), 1000f);
 		scene2 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap2);
-		hs2 = new HorizontalScrolling(scene2.getScene(), 1000f);
+		hs2 = new HorizontalScrolling(scene2.getScene(), 3000f);
 		scene3 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap3);
-		hs3 = new HorizontalScrolling(scene3.getScene(), 1000f);
+		hs3 = new HorizontalScrolling(scene3.getScene(), 2000f);
 		scene4 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap4);
-		hs4 = new HorizontalScrolling(scene4.getScene(), 500f);
+		hs4 = new HorizontalScrolling(scene4.getScene(), 1000f);
 		mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f); //Number of cycles to iterate until update the frame
 	}
 
@@ -67,15 +55,22 @@ public class MyOpenGLRenderer implements Renderer {
 
 		gl.glLoadIdentity();
 
-		gl.glTranslatef(0.0f, 0.0f, -10.0f); //Zoom out
+		gl.glTranslatef(0.0f, -2.5f, -10.0f); //Adjusts
 
 		// SOME CLOUDS
 		gl.glPushMatrix();
-		float ground_offset = 2.0f;
-		gl.glTranslatef(-15.0f, scene2.getSize()*2.0f+ground_offset, -25.0f);
-		//gl.glScalef(-1.0f, -1.0f, 0);
+		gl.glTranslatef(-15.0f, scene2.getSize()*2.0f, -25.0f);
 		hs2.update(System.nanoTime()/10E6f);
 		hs2.draw(gl);
+		gl.glPopMatrix();
+
+		// SOME BACKGROUND MONTAINS
+		gl.glPushMatrix();
+		float ground_offset = 2.0f;
+		gl.glTranslatef(-7.0f, scene3.getSize() * 2.0f+ground_offset, -12.5f);
+		gl.glScalef(1.0f, 1.30f, 0);
+		hs3.update(System.nanoTime()/10E6f);
+		hs3.draw(gl);
 		gl.glPopMatrix();
 
 		// SOME MONTAINS
@@ -89,9 +84,8 @@ public class MyOpenGLRenderer implements Renderer {
 		// MARIO ANIMATION
 		gl.glPushMatrix();
 		gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA ); // Transparent background
-		//gl.glLineWidth(5.0f);
 		gl.glScalef(0.5f, 0.5f, 0);
-		gl.glTranslatef(0.0f, 0.0f, 0.0f);
+		gl.glTranslatef(0.0f, 2.8f, 0.0f);
 		mario.setAnimation("walk");
 		mario.update(System.nanoTime()/10E6f);
 		mario.draw(gl);
