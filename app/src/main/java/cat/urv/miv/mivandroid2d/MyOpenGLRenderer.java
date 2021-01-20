@@ -8,8 +8,9 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
 import cat.urv.miv.mivandroid2d.Animations.AnimationManager;
-
-import static javax.microedition.khronos.opengles.GL10.GL_NICEST;
+import cat.urv.miv.mivandroid2d.Objects.Square;
+import cat.urv.miv.mivandroid2d.Objects.Texture;
+import cat.urv.miv.mivandroid2d.Objects.TileMap;
 
 public class MyOpenGLRenderer implements Renderer {
 
@@ -54,10 +55,10 @@ public class MyOpenGLRenderer implements Renderer {
 	// DRAW
 	@Override
 	public void onDrawFrame(GL10 gl) {
-		
+
 		// Clears the screen and depth buffer.
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-		
+
 		gl.glLoadIdentity();
 
 		gl.glTranslatef(0.0f, 0.0f, -10.0f); //Zoom out
@@ -86,7 +87,6 @@ public class MyOpenGLRenderer implements Renderer {
 		mario.update(System.nanoTime()/10E6f);
 		mario.draw(gl);
 		gl.glPopMatrix();
-
 	}
 
 	// RESIZE
@@ -100,7 +100,7 @@ public class MyOpenGLRenderer implements Renderer {
 		gl.glLoadIdentity();
 		// Calculate the aspect ratio of the window
 		GLU.gluPerspective(gl, 60.0f, (float) width / (float) height, 0.1f, 100.0f);
-		
+
 		// Select the modelview matrix
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 	}

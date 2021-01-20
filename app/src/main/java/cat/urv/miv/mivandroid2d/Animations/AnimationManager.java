@@ -7,10 +7,11 @@ import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import cat.urv.miv.mivandroid2d.Square;
-import cat.urv.miv.mivandroid2d.Texture;
+import cat.urv.miv.mivandroid2d.UpdatableObject;
+import cat.urv.miv.mivandroid2d.Objects.Square;
+import cat.urv.miv.mivandroid2d.Objects.Texture;
 
-public class AnimationManager extends AnimationObject {
+public class AnimationManager extends UpdatableObject {
     HashMap<String, Animation> animations;
     float image_height = 512;
     float image_width = 256;

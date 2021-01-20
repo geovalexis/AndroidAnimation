@@ -1,9 +1,9 @@
-package cat.urv.miv.mivandroid2d.Animations;
+package cat.urv.miv.mivandroid2d;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class AnimationObject {
-    AnimationObject currentAnimation;
+public class UpdatableObject {
+    public UpdatableObject currentAnimation;
 
     public void update(float time){
         currentAnimation.update(time);

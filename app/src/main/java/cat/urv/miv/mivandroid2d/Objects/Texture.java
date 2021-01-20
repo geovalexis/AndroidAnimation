@@ -1,4 +1,4 @@
-package cat.urv.miv.mivandroid2d;
+package cat.urv.miv.mivandroid2d.Objects;
 
 import android.content.Context;
 import android.graphics.Bitmap;

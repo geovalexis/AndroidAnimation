@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import cat.urv.miv.mivandroid2d.Square;
+import cat.urv.miv.mivandroid2d.UpdatableObject;
+import cat.urv.miv.mivandroid2d.Objects.Square;
 
-public class Animation extends AnimationObject {
+public class Animation extends UpdatableObject {
     ArrayList<Square> frames_list;
     int num_frames;
     int frame_actual;
