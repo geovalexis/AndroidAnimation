@@ -87,9 +87,8 @@ public class TileMap {
 
 
     private float[] calculateTextureCoordinates(int tile_num){
-        float row = tile_num / tiles_per_col;
-        float col = tile_num % tiles_per_row;
-        float correction = 1 / (tiles_per_col*tiles_per_row);
+        int row = (int) (tile_num / tiles_per_col);
+        int col = (int) (tile_num % tiles_per_row);
         float xMin =  col / tiles_per_col;
         float yMin = row / tiles_per_row;
         float yMax = (row+1) / tiles_per_row;
