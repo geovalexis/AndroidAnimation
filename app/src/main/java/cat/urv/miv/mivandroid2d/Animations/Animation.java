@@ -11,9 +11,7 @@ public class Animation extends UpdatableObject {
     ArrayList<Square> frames_list;
     int num_frames;
     int frame_actual;
-    float speed; //Number of cycles to iterate until update the frame
-    final float frame_per_second = 25f; // 25 FPS
-    float last_update;
+
 
     public Animation(ArrayList<Square> frames, float speed){
         this.frames_list = frames;

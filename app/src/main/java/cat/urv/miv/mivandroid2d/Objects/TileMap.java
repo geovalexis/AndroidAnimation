@@ -68,7 +68,7 @@ public class TileMap {
         return tilemap;
     }
 
-    private Square[][] generateScene(GL10 gl, Context context, int resource_id, int raw_id){
+    public Square[][] generateScene(GL10 gl, Context context, int resource_id, int raw_id){
         Square[][] scene = new Square[this.scene_matrix.length][this.scene_matrix[0].length];
         for (int row=0; row < scene_matrix.length; row++){
             for (int col=0; col < scene_matrix[0].length; col++){
@@ -80,6 +80,10 @@ public class TileMap {
         }
         return scene;
     }
+
+    public Square[][] getScene() {return scene;};
+
+    public int getSize() {return scene_matrix.length;};
 
 
     private float[] calculateTextureCoordinates(int tile_num){
@@ -98,14 +102,4 @@ public class TileMap {
         };
     }
 
-    public void draw(GL10 gl){
-        for (int y=0; y < scene.length; y++){
-            for (int x=0; x < scene[y].length; x++){
-                gl.glPushMatrix(); // IMPORTANT NOTE: DO A PUSH-POP
-                gl.glTranslatef(x*2, -y*2, 0.0f); // Each square has a size of 2
-                scene[y][x].draw(gl);
-                gl.glPopMatrix();
-            }
-        }
-    }
 }

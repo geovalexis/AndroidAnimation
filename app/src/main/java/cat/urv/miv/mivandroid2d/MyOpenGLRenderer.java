@@ -8,6 +8,7 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
 import cat.urv.miv.mivandroid2d.Animations.AnimationManager;
+import cat.urv.miv.mivandroid2d.Objects.ScrollingObject.HorizontalScrolling;
 import cat.urv.miv.mivandroid2d.Objects.Square;
 import cat.urv.miv.mivandroid2d.Objects.Texture;
 import cat.urv.miv.mivandroid2d.Objects.TileMap;
@@ -18,6 +19,7 @@ public class MyOpenGLRenderer implements Renderer {
 	private Context context;
 	AnimationManager mario;
 	TileMap scene1, scene2, scene3, scene4;
+	HorizontalScrolling hs1, hs2, hs3, hs4;
 
 	public MyOpenGLRenderer(Context context){
 		this.context = context;
@@ -46,10 +48,14 @@ public class MyOpenGLRenderer implements Renderer {
 				});
 
 		scene1 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap1);
+		hs1 = new HorizontalScrolling(scene1.getScene(), 1000f);
 		scene2 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap2);
+		hs2 = new HorizontalScrolling(scene2.getScene(), 1000f);
 		scene3 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap3);
+		hs3 = new HorizontalScrolling(scene3.getScene(), 1000f);
 		scene4 = new TileMap(gl,context, R.drawable.background_tiles, R.raw.tilemap4);
-		mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f); //Number of frame until update the drawing
+		hs4 = new HorizontalScrolling(scene4.getScene(), 500f);
+		mario = new AnimationManager(gl, context, R.drawable.mario, R.raw.mario, 25f); //Number of cycles to iterate until update the frame
 	}
 
 	// DRAW
@@ -65,16 +71,19 @@ public class MyOpenGLRenderer implements Renderer {
 
 		// SOME CLOUDS
 		gl.glPushMatrix();
-		gl.glTranslatef(-15.0f, 12.0f, -25.0f);
+		float ground_offset = 2.0f;
+		gl.glTranslatef(-15.0f, scene2.getSize()*2.0f+ground_offset, -25.0f);
 		//gl.glScalef(-1.0f, -1.0f, 0);
-		scene2.draw(gl);
+		hs2.update(System.nanoTime()/10E6f);
+		hs2.draw(gl);
 		gl.glPopMatrix();
 
 		// SOME MONTAINS
 		gl.glPushMatrix();
-		gl.glTranslatef(-7.0f, 8.0f, -12.5f);
+		gl.glTranslatef(-7.0f, scene4.getSize() * 2.0f, -12.5f);
 		gl.glScalef(1.0f, 1.30f, 0);
-		scene4.draw(gl);
+		hs4.update(System.nanoTime()/10E6f);
+		hs4.draw(gl);
 		gl.glPopMatrix();
 
 		// MARIO ANIMATION
@@ -87,6 +96,7 @@ public class MyOpenGLRenderer implements Renderer {
 		mario.update(System.nanoTime()/10E6f);
 		mario.draw(gl);
 		gl.glPopMatrix();
+
 	}
 
 	// RESIZE
