@@ -30,7 +30,7 @@ public class MyOpenGLRenderer implements Renderer {
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 
 		// Enable functionalities
-		gl.glEnable(GL10.GL_TEXTURE_2D);
+		gl.glEnable(GL10);
 		gl.glEnable(GL10.GL_BLEND);
 		//gl.glEnable(GL10.GL_MULTISAMPLE);
 		//gl.glEnable(GL10.GL_CLAMP_TO_EDGE);
